@@ -1,4 +1,4 @@
-function pathLength = OnePath(vector, pathLength)
+function pathLength = OnePath2(vector, pathLength)
     global xPosition;
     global yPosition;
     global gridSize;
@@ -8,24 +8,24 @@ function pathLength = OnePath(vector, pathLength)
     n = 1;
     xOldPosition = xPosition;
     yOldPosition = yPosition;
-    xNewPosition = round(xOldPosition + n*vector(1));
-    yNewPosition = round(yOldPosition + n*vector(2));
+    xNewPosition = round(xPosition + n*vector(1));
+    yNewPosition = round(yPosition + n*vector(2));
     while xNewPosition > xLength || xNewPosition <= 0 || yNewPosition > yLength || yNewPosition <= 0 
         InitializeTheta();
         vector = CalculateDirectionVector(vector);
-        xNewPosition = round(xOldPosition + n*vector);
-        yNewPosition = round(yOldPosition + n*vector);
+        xNewPosition = round(xOldPosition + n*vector(1));
+        yNewPosition = round(yOldPosition + n*vector(2));
     end
-    while xNewPosition <= xLength && xNewPosition > 0 && yNewPosition <= yLength && yNewPosition > 0 && currentVelocity > 0
+    while xNewPosition <= xLength && xNewPosition > 0 && yNewPosition <= yLength && yNewPosition > 0
         gridSize(xNewPosition,yNewPosition) = gridSize(xNewPosition,yNewPosition) + 1;
         xOldPosition = xNewPosition;
         yOldPosition = yNewPosition;
         n = n+1;
-        xNewPosition = round(xNewPosition + n*vector);
-        yNewPosition = round(yNewPosition + n*vector);
+        xNewPosition = round(xPosition + n*vector(1));
+        yNewPosition = round(yPosition + n*vector(2));
     end
     onePathLength = CalculatePathLength(xOldPosition,yOldPosition);
     pathLength = pathLength + onePathLength;
-    xPosition = oldPosition(1);
-    yPosition = oldPosition(2);
+    xPosition = xOldPosition;
+    yPosition = yOldPosition;
 end

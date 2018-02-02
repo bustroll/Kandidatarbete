@@ -1,7 +1,7 @@
 function InitializeTheta()
     global theta;
-    minTheta = pi/4;
-    maxTheta = pi/2;
+    minTheta = 45; %pi/4;
+    maxTheta = 90; %pi/2;
     newTheta = minTheta + rand*(maxTheta-minTheta);
     while newTheta == theta
         newTheta = minTheta + rand*(maxTheta-minTheta);

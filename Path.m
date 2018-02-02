@@ -1,5 +1,7 @@
 function Path(vector)
     global theta;
+    global currentVelocity;
+    global wall;
     
     turn = 0;
     procent = 0.0;
@@ -11,6 +13,8 @@ function Path(vector)
         vector = CalculateDirectionVector(vector);
         procent = CleanArea();
         turn = turn + 1;
+        wall = 0;
+        %currentVelocity = 0;
         PlotSim();
         disp(['Turn: ', num2str(turn)])
         disp(['Theta: ', num2str(theta)])

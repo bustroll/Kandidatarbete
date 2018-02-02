@@ -20,6 +20,8 @@ global gridSize;
 gridSize = zeros(110,65);
 global timeStep;
 timeStep = 1;
+global wall;
+wall = 0;
 
 InitializePostion();
 InitializeTheta();

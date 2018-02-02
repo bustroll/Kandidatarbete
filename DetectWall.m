@@ -1,17 +1,19 @@
-function wall = DetectWall(vector,newPosition)
+function DetectWall(vector,newPosition)
     global currentVelocity;
     global acceleration;
     global gridSize;
     global timeStep;
+    global wall;
     
     xLength = size(gridSize,1);
     yLength = size(gridSize,2);
-    wall = 0;
-    
+   
     nCurrentVelocity = currentVelocity + acceleration*timeStep;
     newPos = round(newPosition + nCurrentVelocity*transpose(vector));
+    
     nnCurrentVelocity = nCurrentVelocity + acceleration*timeStep;
     newPos = round(newPos + nnCurrentVelocity*transpose(vector));
+    
     nnnCurrentVelocity = nnCurrentVelocity + acceleration*timeStep;
     newPos = round(newPos + nnnCurrentVelocity*transpose(vector));
     

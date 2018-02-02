@@ -1,4 +1,4 @@
-function pathLength = OnePath(vector, pathLength)
+function pathLength = OnePathKopia(vector, pathLength)
     global xPosition;
     global yPosition;
     global maxVelocity;
@@ -20,7 +20,7 @@ function pathLength = OnePath(vector, pathLength)
     while newPosition(1) > xLength || newPosition(1) <= 0 || newPosition(2) > yLength || newPosition(2) <= 0 
         InitializeTheta();
         vector = CalculateDirectionVector(vector);
-        newPosition = round(oldPosition + currentVelocity*transpose(vector))
+        newPosition = round(oldPosition + currentVelocity*transpose(vector));
     end
     while newPosition(1) <= xLength && newPosition(1) > 0 && newPosition(2) <= yLength && newPosition(2) > 0 && currentVelocity > 0
         gridSize(newPosition(1),newPosition(2)) = gridSize(newPosition(1),newPosition(2)) + 1;
@@ -30,13 +30,13 @@ function pathLength = OnePath(vector, pathLength)
             DetectWall(vector,newPosition);
             if wall == 1
                 currentVelocity = currentVelocity + deacceleration*timeStep;
-                newPosition = round(newPosition + currentVelocity*transpose(vector))
+                newPosition = round(newPosition + currentVelocity*transpose(vector));
             else
                 currentVelocity = currentVelocity + acceleration*timeStep;
                 if currentVelocity > maxVelocity
                     currentVelocity = maxVelocity;
                 end
-                newPosition = round(newPosition + currentVelocity*transpose(vector))
+                newPosition = round(newPosition + currentVelocity*transpose(vector));
             end
         elseif currentVelocity >= maxVelocity
             if currentVelocity > maxVelocity
@@ -45,10 +45,10 @@ function pathLength = OnePath(vector, pathLength)
             DetectWall(vector,newPosition);
             if wall == 1 
                 currentVelocity = currentVelocity + deacceleration*timeStep;
-                newPosition = round(newPosition + currentVelocity*transpose(vector))
+                newPosition = round(newPosition + currentVelocity*transpose(vector));
             else
                 currentVelocity = currentVelocity + a0*timeStep;
-                newPosition = round(newPosition + currentVelocity*transpose(vector))
+                newPosition = round(newPosition + currentVelocity*transpose(vector));
             end
         end
         %PlotSim();
