@@ -20,7 +20,7 @@ function pathLength = OnePath(vector, pathLength)
         vector = CalculateDirectionVector(vector);
         newPosition = round(oldPosition + currentVelocity*transpose(vector));
     end
-    %gridSize(xPosition,yPosition) = gridSize(xPosition,yPosition)+1;
+    gridSize(xPosition,yPosition) = gridSize(xPosition,yPosition)+1;
     while newPosition(1) <= xLength && newPosition(1) > 0 && newPosition(2) <= yLength && newPosition(2) > 0 && currentVelocity > 0
         gridSize(newPosition(1),newPosition(2)) = gridSize(newPosition(1),newPosition(2)) + 1;
         oldPosition = newPosition;
@@ -46,6 +46,7 @@ function pathLength = OnePath(vector, pathLength)
                 newPosition = round(newPosition + currentVelocity*transpose(vector));
             end
         end
+        PlotSim();
     end
     onePathLength = CalculatePathLength(oldPosition(1),oldPosition(2));
     pathLength = pathLength + onePathLength;
