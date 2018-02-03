@@ -1,60 +1,33 @@
 function pathLength = OnePath(vector, pathLength)
     global xPosition;
     global yPosition;
-    global maxVelocity;
-    global currentVelocity;
-    global acceleration;
-    global deacceleration;
     global gridSize;
-    global timeStep;
-    global wall;
+    global time;
     
     xLength = size(gridSize,1);
     yLength = size(gridSize,2);
-    a0 = 0;
-    gridSize(xPosition,yPosition) = gridSize(xPosition,yPosition)+1;
-    oldPosition = [xPosition,yPosition];
-    currentVelocity = acceleration*timeStep;
-    newPosition = round(oldPosition + currentVelocity*transpose(vector));
-   
-    while newPosition(1) > xLength || newPosition(1) <= 0 || newPosition(2) > yLength || newPosition(2) <= 0 
+    n = 1;
+    xOldPosition = xPosition;
+    yOldPosition = yPosition;
+    xNewPosition = round(xPosition + n*vector(1));
+    yNewPosition = round(yPosition + n*vector(2));
+    while xNewPosition > xLength || xNewPosition <= 0 || yNewPosition > yLength || yNewPosition <= 0
+        time = time+1;
         InitializeTheta();
         vector = CalculateDirectionVector(vector);
-        newPosition = round(oldPosition + currentVelocity*transpose(vector))
+        xNewPosition = round(xOldPosition + n*vector(1));
+        yNewPosition = round(yOldPosition + n*vector(2));
     end
-    while newPosition(1) <= xLength && newPosition(1) > 0 && newPosition(2) <= yLength && newPosition(2) > 0 && currentVelocity > 0
-        gridSize(newPosition(1),newPosition(2)) = gridSize(newPosition(1),newPosition(2)) + 1;
-        %gridSize(oldPosition(1),oldPosition(2)) = gridSize(oldPosition(1),oldPosition(2)) + 1;
-        oldPosition = newPosition;
-        if currentVelocity < maxVelocity
-            DetectWall(vector,newPosition);
-            if wall == 1
-                currentVelocity = currentVelocity + deacceleration*timeStep;
-                newPosition = round(newPosition + currentVelocity*transpose(vector))
-            else
-                currentVelocity = currentVelocity + acceleration*timeStep;
-                if currentVelocity > maxVelocity
-                    currentVelocity = maxVelocity;
-                end
-                newPosition = round(newPosition + currentVelocity*transpose(vector))
-            end
-        elseif currentVelocity >= maxVelocity
-            if currentVelocity > maxVelocity
-                currentVelocity = maxVelocity;
-            end
-            DetectWall(vector,newPosition);
-            if wall == 1 
-                currentVelocity = currentVelocity + deacceleration*timeStep;
-                newPosition = round(newPosition + currentVelocity*transpose(vector))
-            else
-                currentVelocity = currentVelocity + a0*timeStep;
-                newPosition = round(newPosition + currentVelocity*transpose(vector))
-            end
-        end
-        %PlotSim();
+    while xNewPosition <= xLength && xNewPosition > 0 && yNewPosition <= yLength && yNewPosition > 0
+        gridSize(xNewPosition,yNewPosition) = gridSize(xNewPosition,yNewPosition) + 1;
+        xOldPosition = xNewPosition;
+        yOldPosition = yNewPosition;
+        n = n+1;
+        xNewPosition = round(xPosition + n*vector(1));
+        yNewPosition = round(yPosition + n*vector(2));
     end
-    onePathLength = CalculatePathLength(oldPosition(1),oldPosition(2));
+    onePathLength = CalculatePathLength(xOldPosition,yOldPosition);
     pathLength = pathLength + onePathLength;
-    xPosition = oldPosition(1);
-    yPosition = oldPosition(2);
+    xPosition = xOldPosition;
+    yPosition = yOldPosition;
 end

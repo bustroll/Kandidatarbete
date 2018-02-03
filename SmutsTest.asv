@@ -2,7 +2,30 @@ clear all
 clf
 clc
 
-nbrOfRuns = 10;
+% global xPosition;
+% xPosition = -1;
+% global yPosition;
+% yPosition = -1;
+% global theta;
+% theta = 0;
+% global maxVelocity;
+% maxVelocity = 1.39;
+% global currentVelocity;
+% currentVelocity = 0;
+% global acceleration;
+% acceleration = 0.4;
+% global deacceleration;
+% deacceleration = -0.4;
+% global gridSize;
+% gridSize = zeros(234,137); %i decimeter
+% global wall;
+% wall = 0;
+% global timeStep;
+% timeStep = 1;
+ %global time;
+% time = 0;
+
+nbrOfRuns = 5;
 saveData = zeros(nbrOfRuns, 4);
 for run = 1:nbrOfRuns
     ResetGlobalVar();
@@ -12,18 +35,25 @@ for run = 1:nbrOfRuns
     data = Path(vector);
     
     saveData(run,:) = data;
-    summa = sum(saveData)/nbrOfRuns;
-    medelTurn = summa(1);
-    medelTime = summa(2);
-    medelPathLength = summa(3);
-    medelProcent = summa(4);
+    summa = sum(saveData);
+    medelTurn = summa(1)/nbrOfRuns;
+    medelTime = summa(2)/nbrOfRuns;
+    medelPathLength = summa(3)/nbrOfRuns;
+    medelProcent = summa(4)/nbrOfRuns;
     disp(['Medel Turn: ', num2str(medelTurn)])
     disp(['Medel Time: ', num2str(medelTime)])
     disp(['Medel Path Length: ', num2str(medelPathLength)])
     disp(['Medel Procent: ', num2str(medelProcent)])
 end
 %%
-PlotSim();
+
+
+plot(summa(run,1),run,'-*b')
+hold on
+
+
+%axis([0 5 0 700])
+
 
 %%1. Roboten får en startposition
 %%2. Beräkna riktningsvektor
