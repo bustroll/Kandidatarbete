@@ -1,6 +1,5 @@
 # Kandidatarbete
 #
-########################################################################
 # Kommandon:
 
  Hämta filer i "molnet". Gör detta innan du pushar för att undvika konflikter!!!
@@ -24,7 +23,6 @@
 
  Skifta mellan olika brancher. BRANCHNAMN ska vara namnet på den branch du vill komma till
  git checkout BRANCHNAMN
-###########################################################################
 
 # Använd branch till varje ny del
 
@@ -36,5 +34,3 @@
  fannie - Här ligger bildanalys gjord av Fannie
  bildanalys - Här ligger bildanalys gjord av Alice (just nu)
  sensor - Här ligger sensor gjord av Rasmus (just nu)
-
-#############################################################################
